@@ -1,0 +1,15 @@
+[Unit]
+Description=Meshtastic TCP Bridge for Android App via USB Serial (legacy socat)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Group=dialout
+ExecStartPre=/bin/sleep 8
+ExecStart=/usr/bin/socat -d -d TCP-LISTEN:4403,reuseaddr,keepalive FILE:/dev/ttyACM0,raw,echo=0,b115200
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

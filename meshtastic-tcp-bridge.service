@@ -1,0 +1,17 @@
+[Unit]
+Description=Meshtastic TCP Bridge for USB Serial Meshtastic devices
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=meshtastic-tcp-bridge
+Group=dialout
+WorkingDirectory=/opt/meshtastic-tcp-bridge
+EnvironmentFile=/etc/meshtastic-tcp-bridge.env
+ExecStart=/opt/meshtastic-tcp-bridge/.venv/bin/python /opt/meshtastic-tcp-bridge/bridge.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
